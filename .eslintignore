@@ -1,0 +1,9 @@
+# JavaScript Files
+/*.js
+
+# Dependency directories
+node_modules
+dist
+
+# Typescript build / generate output
+dist

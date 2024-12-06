@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "./dist",
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@docs/*": ["../docs/*"],
+      "@application/*": ["application/*"],
+      "@common/*": ["common/*"],
+      "@domain/*": ["domain/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@main/*": ["main/*"],
+      "@presentation/*": ["presentation/*"],
+      "@assertions/*": ["../tests/assertions/*"],
+      "@dummies/*": ["../tests/dummies/*"],
+      "@mocks/*": ["../tests/mocks/*"],
+      "@stubs/*": ["../tests/stubs/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "./tests/**/**/*.ts", "./features/**/**/*.js"],
+  "exclude": ["node_modules", "cucumber.cjs"]
+}

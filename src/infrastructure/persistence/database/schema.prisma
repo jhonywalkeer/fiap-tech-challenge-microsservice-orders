@@ -1,0 +1,44 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.0.x"]
+  previewFeatures = ["fullTextSearch"]
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../../../../docs/images/diagrams/entity-relationship-diagram.svg"
+  theme = "neutral"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model order {
+  id          String       @id @default(cuid())
+  order       String       @unique
+  status      String
+  order_item  order_item[]
+  observation String
+  customer_name    String
+  payment_id  String?
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  deleted_at  DateTime?
+  user_id     String?
+}
+
+model order_item {
+  id         String   @id @default(cuid())
+  order_id   String
+  product_id String
+  name       String
+  quantity   Int
+  price      Float
+  amount     Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  order   order   @relation(fields: [order_id], references: [id], onDelete: Cascade)
+}

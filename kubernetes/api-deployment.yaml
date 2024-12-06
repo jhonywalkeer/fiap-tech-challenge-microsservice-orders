@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app-container
+          image: app:latest # Imagem local gerada pelo Docker
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: postgres://root:1234@db-service:5432/fiap-tech-challenge-db-orders
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30001
+  selector:
+    app: app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db-container
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "root"
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "fiap-tech-challenge-db-orders"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: db

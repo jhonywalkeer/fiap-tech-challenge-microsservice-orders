@@ -1,0 +1,73 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": true
+  },
+  "parserOptions": {
+    "project": ["**/tsconfig.json"]
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint", "eslint-plugin-import-helpers"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:promise/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "space-before-function-parent": 0,
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "@typescript-eslint/method-signature-style": ["error", "method"],
+    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
+    "@typescript-eslint/no-throw-literal": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/ban-ts-comment": 1, // TODO: enable
+    "promise/catch-or-return": "off",
+    "promise/no-callback-in-promise": "off",
+    "promise/always-return": "off" // TODO: enable
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "**/dist/**/*",
+    "**/__mocks__/**/*",
+    "**/coverage/**/*",
+    ".eslintrc.js",
+    "commitlint.config.js",
+    "jest.config.ts",
+    ".lintstagedrc"
+  ],
+  "settings": {
+    "typescript": {},
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  }
+}
